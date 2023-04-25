@@ -1,17 +1,16 @@
 package com.logic.nemonemo.entity;
 
-import com.logic.nemonemo.enums.UserRole;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +19,10 @@ public class User extends BaseEntity {
     private String name;
     private String username;
     private String password;
-    private String email;
-    private String image;
-    private int level;
-    private UserRole role;
+    // private String email;
+    // private String image;
+    // private int level;
+    // private UserRole role;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Board> boards;
