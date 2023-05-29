@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class UserController {
     private final UserService userService;
-    
+
     @GetMapping("/{id}")
     public UserResponse getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
