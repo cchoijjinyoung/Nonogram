@@ -33,3 +33,5 @@
 > @Builder 어노테이션을 클래스가 아닌 생성자에 붙여주면 해결된다.
 
 2. ModelMapper를 사용하면 User를 UserResponse로 쉽게 매핑할 수 있다.
+3. @EnableJpaAuditing를 Application 위에 추가해줘야 스프링부트가 JPA Auditing을 활성화한다.
+  > Postman으로 회원가입을 해도 생성날짜가 null 값으로 들어갔었다. @EnableJpaAuditing을 추가하여 해결했다.

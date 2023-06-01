@@ -35,6 +35,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * 유효성 검사
+     * 닉네임 중복
+     */
     public boolean isNicknameAvaliable(String nickname) {
         Optional<User> existingUser = userRepository.findByNickname(nickname);
         return existingUser.isEmpty();
