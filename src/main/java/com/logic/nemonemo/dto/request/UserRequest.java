@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserRequest {
     private Long id;
-    private String name;
+    private String nickname;
     @NotEmpty
     private String username;
     @NotEmpty

@@ -19,11 +19,11 @@ public class UserRepositoryTest {
     @Test
     @DisplayName("회원 가입 테스트")
     @Transactional // Jpa는  트랜젝션안에서 엔티티의 동일성을 보장한다.
-    public void joinUser() {
+    public void shouldSaveUser() {
         // given
         User insertUser = userRepository.save(User.builder()
                         .id(1L)
-                        .name("choi")
+                        .nickname("choi")
                         .username("jin")
                         .password("1234")
                         .build());

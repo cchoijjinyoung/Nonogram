@@ -19,7 +19,7 @@ import java.util.List;
 public class UserResponse {
 
     private Long id;
-    private String name;
+    private String nickname;
     private String username;
     private String password;
     private String email;
