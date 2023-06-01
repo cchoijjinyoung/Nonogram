@@ -4,9 +4,10 @@
   - User Entity
   - UserController - Service - Repository
     - [x] 유저 회원 가입 API 작성
+      - [x] AuthController로 역할 분리하기
       - [ ] 유효성 검사
         - [x] nickname 중복검사
-          > Service에서 따로 매소드로 분류. 
+          > Service에서 따로 매소드로 분류
       - [x] Test 코드 작성 및 실행 성공
     - [x] 유저 정보 조회 API 작성
       - [x] Test 코드 작성 및 실행 성공
@@ -35,3 +36,7 @@
 2. ModelMapper를 사용하면 User를 UserResponse로 쉽게 매핑할 수 있다.
 3. @EnableJpaAuditing를 Application 위에 추가해줘야 스프링부트가 JPA Auditing을 활성화한다.
   > Postman으로 회원가입을 해도 생성날짜가 null 값으로 들어갔었다. @EnableJpaAuditing을 추가하여 해결했다.
+
+4. Test 작성 시 @BeforeEach를 활용하여 중복 코드들을 제거. 
+   - @BeforeEach - 테스트마다 초기 상태로 만들기 위해 사용
+   - @AfterEach - 테스트가 끝나고 원상복귀를 위해 사용
