@@ -17,5 +17,10 @@ public class UserController {
     public UserResponse getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
+
+    @PutMapping("/{id}")
+    public UserResponse modify(@PathVariable("id") Long id) {
+        return userService.updateUserById(id);
+    }
 }
 
