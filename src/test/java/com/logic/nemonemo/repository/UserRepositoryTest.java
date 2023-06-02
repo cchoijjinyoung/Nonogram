@@ -2,18 +2,18 @@ package com.logic.nemonemo.repository;
 
 import com.logic.nemonemo.entity.User;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@DataJpaTest
 @RunWith(SpringRunner.class)
 public class UserRepositoryTest {
 
@@ -28,11 +28,11 @@ public class UserRepositoryTest {
                 .build());
     }
     @BeforeEach
-    public void cleanUp() {
+    void cleanUp() {
         userRepository.deleteAll();
     }
-    @AfterAll
-    public void clean() {
+    @AfterEach
+    void clean() {
         userRepository.deleteAll();
     }
     @Test

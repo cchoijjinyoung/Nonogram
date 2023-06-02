@@ -4,7 +4,7 @@ import com.logic.nemonemo.dto.request.AuthRequest;
 import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class AuthServiceTest {
 
     @Autowired
@@ -33,11 +33,11 @@ public class AuthServiceTest {
     }
 
     @BeforeEach
-    public void cleanUp() {
+    void cleanUp() {
         userRepository.deleteAll();
     }
-    @AfterAll
-    public void clean() {
+    @AfterEach
+    void clean() {
         userRepository.deleteAll();
     }
 

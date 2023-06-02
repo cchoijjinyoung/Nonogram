@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -24,6 +26,9 @@ public class UserService {
         return userResponse;
     }
 
-
+    public void updateUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        
+    }
 }
 

@@ -5,7 +5,7 @@ import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
 import com.logic.nemonemo.service.UserService;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -35,12 +35,12 @@ public class UserControllerTest {
                 .build());
     }
     @BeforeEach
-    public void cleanUp() {
+    void cleanUp() {
         userRepository.deleteAll();
     }
 
-    @AfterAll
-    public void clean() {
+    @AfterEach
+    void clean() {
         userRepository.deleteAll();
     }
     @Test
