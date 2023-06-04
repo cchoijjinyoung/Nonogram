@@ -28,7 +28,7 @@ public class UserService {
 
     public void updateUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        
+
     }
 }
 
