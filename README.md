@@ -17,13 +17,12 @@
       - [ ] 유저 수정 API 작성
         - [ ] Test 코드 작성 및 실행 성공
         - [ ] Exception
-      - [ ] 유저 수정 API 작성
-        - [ ] Test 코드 작성 및 실행 성공
-        - [ ] Exception
       - UserResponse
         - [ ] Builder 적용
 
 - Board
+  - [ ] 페이징 : QueryDSL 사용하기
+    > 정렬이나, 검색 조건들이 추가됐을 때 편함.
 - Comment
 - Notification
 - Reply
@@ -42,3 +41,6 @@
 4. Test 작성 시 @BeforeEach를 활용하여 중복 코드들을 제거. 
    - @BeforeEach - 테스트마다 초기 상태로 만들기 위해 사용
    - @AfterEach - 테스트가 끝나고 원상복귀를 위해 사용
+
+5. spring-boot-starter-test 라이브러리는 junit5를 제공한다.
+   - Test클래스 및 매소드에 public을 필수로 작성하지 않아도 된다.

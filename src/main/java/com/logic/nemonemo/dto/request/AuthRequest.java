@@ -1,16 +1,11 @@
 package com.logic.nemonemo.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 
-@Data
-@Builder
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class AuthRequest {
     private Long id;
     private String nickname;
@@ -20,5 +15,14 @@ public class AuthRequest {
     private String password;
 
     // private String email;
+
+    @Builder
+    public AuthRequest(Long id, String nickname, String username, String password) {
+        this.id = id;
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
+    }
+
 
 }

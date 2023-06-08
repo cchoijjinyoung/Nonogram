@@ -4,11 +4,14 @@ import com.logic.nemonemo.dto.response.UserResponse;
 import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -28,7 +31,6 @@ public class UserService {
 
     public void updateUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
-
     }
 }
 

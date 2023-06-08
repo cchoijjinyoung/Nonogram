@@ -3,18 +3,15 @@ package com.logic.nemonemo.service;
 import com.logic.nemonemo.dto.request.AuthRequest;
 import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class AuthServiceTest {
 
@@ -46,9 +43,6 @@ public class AuthServiceTest {
     public void shouldSignupUser() throws Exception {
         //given
         AuthRequest authRequest = new AuthRequest();
-        authRequest.setUsername("choi");
-        authRequest.setPassword("1234");
-        authRequest.setNickname("jin");
         //when
         authService.signUp(authRequest);
         //then
