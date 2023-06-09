@@ -44,3 +44,5 @@
 
 5. spring-boot-starter-test 라이브러리는 junit5를 제공한다.
    - Test클래스 및 매소드에 public을 필수로 작성하지 않아도 된다.
+
+6. validation을 어떻게 할 것인지. ex) 회원가입 시 유효성 검사
