@@ -30,9 +30,13 @@ public class AuthControllerTest {
 
     @Test
     @DisplayName("유저네임이 중복되지 않는 회원의 가입")
-    public void shouldSignUpUser() throws Exception {
+    public void 회원가입() throws Exception {
         //given
-        AuthRequest authRequest = new AuthRequest();
+        AuthRequest authRequest = AuthRequest.builder()
+                .username("foo")
+                .nickname("bar")
+                .password("1234")
+                .build();
         //when
         ResponseEntity<String> response = authController.signUp(authRequest);
         //then
@@ -43,11 +47,22 @@ public class AuthControllerTest {
 
     @Test
     @DisplayName("유저네임이 중복되는 회원의 가입")
-    public void shouldSignUpDuplicatedUsername() throws Exception {
+    public void 유저네임_중복_회원가입() throws Exception {
         //given
-        AuthRequest authRequest = new AuthRequest();
+        AuthRequest authRequest1 = AuthRequest.builder()
+                .username("foo")
+                .nickname("bar")
+                .password("1234")
+                .build();
+
+        AuthRequest authRequest2 = AuthRequest.builder()
+                .username("foo")
+                .nickname("bar")
+                .password("1234")
+                .build();
         //when
-        ResponseEntity<String> response = authController.signUp(authRequest);
+        authController.signUp(authRequest1);
+        ResponseEntity<String> response = authController.signUp(authRequest2);
         //then
         assertThat(response.getStatusCode().value()).isEqualTo(400);
         assertThat(response.getStatusCode().name()).isEqualTo("BAD_REQUEST");

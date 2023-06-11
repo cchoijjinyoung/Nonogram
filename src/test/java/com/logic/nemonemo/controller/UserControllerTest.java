@@ -32,14 +32,17 @@ class UserControllerTest {
 
     @Test
     @DisplayName("id로 회원조회")
-    void shouldFindUserById() {
+    void 회원조회() {
+        // given
         User user = User.builder()
+                .id(100L)
                 .username("foo")
                 .nickname("bar")
                 .build();
+        // when
         userRepository.save(user);
-        UserResponse userResponse = userController.getUserById(1L);
-        //then
+        UserResponse userResponse = userController.getUserById(100L);
+        // then
         assertNotNull(userResponse);
         assertEquals("foo", userResponse.getUsername());
         assertEquals("bar", userResponse.getNickname());

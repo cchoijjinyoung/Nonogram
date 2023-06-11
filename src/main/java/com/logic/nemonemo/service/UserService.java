@@ -24,8 +24,8 @@ public class UserService {
         // builder 추가해야함.
         userResponse.setId(user.getId());
         userResponse.setUsername(user.getUsername());
-        userResponse.setPassword(user.getPassword());
         userResponse.setNickname(user.getNickname());
+        userResponse.setPassword(user.getPassword());
         return userResponse;
     }
 

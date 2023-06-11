@@ -18,8 +18,8 @@ public class AuthService {
     public void signUp(AuthRequest authRequest) {
         User user = User.builder()
                 .username(authRequest.getUsername())
-                .password(authRequest.getPassword())
                 .nickname(authRequest.getNickname())
+                .password(authRequest.getPassword())
                 .build();
         userRepository.save(user);
     }

@@ -3,7 +3,6 @@ package com.logic.nemonemo.service;
 import com.logic.nemonemo.dto.request.AuthRequest;
 import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,42 +19,41 @@ public class AuthServiceTest {
     @Autowired
     private AuthService authService;
 
-    @DisplayName("테스트를 위한 기본회원 저장")
-    private void saveBasicUser() {
-        userRepository.save(User.builder()
-                .username("foo")
-                .nickname("bar")
-                .password("1234")
-                .build());
-    }
-
     @BeforeEach
-    void cleanUp() {
-        userRepository.deleteAll();
-    }
-    @AfterEach
     void clean() {
         userRepository.deleteAll();
     }
 
     @Test
     @DisplayName("회원 가입")
-    public void shouldSignupUser() throws Exception {
+    void 회원가입() throws Exception {
         //given
-        AuthRequest authRequest = new AuthRequest();
+        AuthRequest authRequest = AuthRequest.builder()
+                .username("foo")
+                .nickname("bar")
+                .password("1234")
+                .build();
         //when
         authService.signUp(authRequest);
         //then
         User user = userRepository.findByUsername(authRequest.getUsername()).get();
-        assertThat(user.getUsername()).isEqualTo("choi");
+        assertThat(user.getUsername()).isEqualTo("foo");
+        assertThat(user.getNickname()).isEqualTo("bar");
         assertThat(user.getPassword()).isEqualTo("1234");
-        assertThat(user.getNickname()).isEqualTo("jin");
     }
 
     @Test
     @DisplayName("닉네임 중복 검사")
-    public void nicknameDuplicateTest() throws Exception {
-        saveBasicUser();
+    public void 닉네임_중복_검사() throws Exception {
+        // given
+        User user = User.builder()
+                .id(1L)
+                .username("foo")
+                .nickname("bar")
+                .password("1234")
+                .build();
+        userRepository.save(user);
+        // when
         boolean answer = authService.isUsernameAvaliable("foo");
         //then
         assertThat(answer).isEqualTo(false);

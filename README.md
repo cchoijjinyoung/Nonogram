@@ -46,3 +46,9 @@
    - Test클래스 및 매소드에 public을 필수로 작성하지 않아도 된다.
 
 6. validation을 어떻게 할 것인지. ex) 회원가입 시 유효성 검사
+
+## 고민해야할 내용
+1. findById
+2. Response 필드 및 빌더
+3. Exception 어떻게 할 지 - validation 포함
+4. 

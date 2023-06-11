@@ -28,7 +28,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	// Slf4j - 로그 사용 위해
+
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 
@@ -39,6 +39,8 @@ dependencies {
 	// ApplicationContextException
 	// Failed to start bean 'documentationPluginBootstrapper' - 에러 발생.
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	// slf4j 포함
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 }
