@@ -1,10 +1,13 @@
 package com.logic.nemonemo.controller;
 
+import com.logic.nemonemo.dto.request.UserRequest;
 import com.logic.nemonemo.dto.response.UserResponse;
 import com.logic.nemonemo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -19,9 +22,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void modify(@PathVariable("id") Long id) {
+    public UserResponse modify(UserRequest userRequest) {
+        return userService.updateUser(userRequest);
+    }
 
-        userService.updateUserById(id);
+    @GetMapping()
+    public List<UserResponse> getList() {
+        return userService.findUserList();
     }
 }
 

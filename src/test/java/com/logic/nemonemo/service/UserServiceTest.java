@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -39,5 +42,28 @@ class UserServiceTest {
         assertNotNull(userResponse);
         assertEquals("foo", userResponse.getUsername());
         assertEquals("bar", userResponse.getNickname());
+    }
+
+    @Test
+    @DisplayName("회원 목록 조회")
+    void 회원_목록_조회() throws Exception {
+        //given
+        User user1 = User.builder()
+                .username("foo1")
+                .nickname("bar")
+                .password("1234")
+                .build();
+        userRepository.save(user1);
+
+        User user2 = User.builder()
+                .username("foo2")
+                .nickname("bar")
+                .password("1234")
+                .build();
+        userRepository.save(user2);
+        //when
+        List<UserResponse> users = userService.findUserList();
+        //then
+        assertThat(users.size()).isEqualTo(2L);
     }
 }

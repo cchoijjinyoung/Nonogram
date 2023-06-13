@@ -1,8 +1,10 @@
 package com.logic.nemonemo.controller;
 
 import com.logic.nemonemo.dto.request.AuthRequest;
+import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
 import com.logic.nemonemo.service.AuthService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
@@ -38,7 +42,8 @@ public class AuthControllerTest {
                 .password("1234")
                 .build();
         //when
-        ResponseEntity<String> response = authController.signUp(authRequest);
+        authController.signUp(authRequest);
+        userRepository.findByUsername("foo")
         //then
         assertThat(response.getStatusCode().value()).isEqualTo(200);
         assertThat(response.getStatusCode().name()).isEqualTo("OK");
@@ -47,7 +52,7 @@ public class AuthControllerTest {
 
     @Test
     @DisplayName("유저네임이 중복되는 회원의 가입")
-    public void 유저네임_중복_회원가입() throws Exception {
+    void 유저네임_중복_회원가입() throws Exception {
         //given
         AuthRequest authRequest1 = AuthRequest.builder()
                 .username("foo")
@@ -62,10 +67,8 @@ public class AuthControllerTest {
                 .build();
         //when
         authController.signUp(authRequest1);
-        ResponseEntity<String> response = authController.signUp(authRequest2);
+        authController.signUp(authRequest2);
         //then
-        assertThat(response.getStatusCode().value()).isEqualTo(400);
-        assertThat(response.getStatusCode().name()).isEqualTo("BAD_REQUEST");
-        assertThat(response.getBody()).isEqualTo("회원가입 실패");
+        Assertions.assertThat(authRequest1).
     }
 }

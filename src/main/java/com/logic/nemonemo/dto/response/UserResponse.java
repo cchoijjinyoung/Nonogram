@@ -1,33 +1,20 @@
 package com.logic.nemonemo.dto.response;
 
-import com.logic.nemonemo.entity.Board;
-import com.logic.nemonemo.entity.Comment;
-import com.logic.nemonemo.entity.Notification;
-import com.logic.nemonemo.enums.UserRole;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 public class UserResponse {
     private Long id;
-    private String nickname;
     private String username;
+    private String nickname;
     private String password;
-    private String email;
-    private String image;
-    private int level;
-    private UserRole role;
-    private List<Board> boards;
-    private List<Notification> notification;
-    private List<Comment> comment;
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
+
+    @Builder
+    public UserResponse(Long id, String nickname, String username, String password) {
+        this.id = id;
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
+    }
 }

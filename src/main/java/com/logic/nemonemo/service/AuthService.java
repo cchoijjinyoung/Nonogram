@@ -7,15 +7,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
-    public void signUp(AuthRequest authRequest) {
+    public void join(AuthRequest authRequest) {
+        validateDuplicateUser(authRequest.getUsername());
         User user = User.builder()
                 .username(authRequest.getUsername())
                 .nickname(authRequest.getNickname())
@@ -24,12 +23,10 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    /**
-     * 유효성 검사
-     * 닉네임 중복
-     */
-    public boolean isUsernameAvaliable(String username) {
-        Optional<User> existingUser = userRepository.findByUsername(username);
-        return existingUser.isEmpty();
+    public void validateDuplicateUser(String username) {
+        userRepository.findByUsername(username)
+                .ifPresent((u -> {
+                    throw new IllegalStateException("이미 존재하는 ID입니다.");
+                }));
     }
 }

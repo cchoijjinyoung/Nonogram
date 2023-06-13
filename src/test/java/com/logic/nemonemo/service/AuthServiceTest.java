@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class AuthServiceTest {
@@ -34,7 +35,7 @@ public class AuthServiceTest {
                 .password("1234")
                 .build();
         //when
-        authService.signUp(authRequest);
+        authService.join(authRequest);
         //then
         User user = userRepository.findByUsername(authRequest.getUsername()).get();
         assertThat(user.getUsername()).isEqualTo("foo");
@@ -46,16 +47,22 @@ public class AuthServiceTest {
     @DisplayName("닉네임 중복 검사")
     public void 닉네임_중복_검사() throws Exception {
         // given
-        User user = User.builder()
-                .id(1L)
+        User user1 = User.builder()
                 .username("foo")
                 .nickname("bar")
                 .password("1234")
                 .build();
-        userRepository.save(user);
+        userRepository.save(user1);
+
+        AuthRequest authRequest = AuthRequest.builder()
+                .username("foo")
+                .nickname("bar2")
+                .password("1234")
+                .build();
         // when
-        boolean answer = authService.isUsernameAvaliable("foo");
+        IllegalStateException e = assertThrows(
+                IllegalStateException.class, () -> authService.validateDuplicateUser(authRequest.getUsername()));
         //then
-        assertThat(answer).isEqualTo(false);
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 ID입니다.");
     }
 }
