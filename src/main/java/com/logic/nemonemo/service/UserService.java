@@ -18,7 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public UserResponse getUserById(Long id) {
+    public UserResponse findOne(Long id) {
         User user = userRepository.findById(id).get();
         UserResponse userResponse = new UserResponse();
         // builder 추가해야함.

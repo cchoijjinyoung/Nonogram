@@ -35,13 +35,12 @@ class UserControllerTest {
     void 회원조회() {
         // given
         User user = User.builder()
-                .id(100L)
                 .username("foo")
                 .nickname("bar")
                 .build();
         // when
         userRepository.save(user);
-        UserResponse userResponse = userController.getUserById(100L);
+        UserResponse userResponse = userController.getUserById(user.getId());
         // then
         assertNotNull(userResponse);
         assertEquals("foo", userResponse.getUsername());

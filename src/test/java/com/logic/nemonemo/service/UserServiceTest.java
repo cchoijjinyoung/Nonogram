@@ -34,7 +34,7 @@ class UserServiceTest {
                 .build();
         userRepository.save(user);
         //when
-        UserResponse userResponse = userService.getUserById(1L);
+        UserResponse userResponse = userService.findOne(user.getId());
         //then
         assertNotNull(userResponse);
         assertEquals("foo", userResponse.getUsername());

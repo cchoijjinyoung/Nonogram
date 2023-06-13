@@ -51,4 +51,5 @@
 1. findById
 2. Response 필드 및 빌더
 3. Exception 어떻게 할 지 - validation 포함
-4. 
+4. Service에서 User -> UserResponse로 바꿔주는게 과연 맞는건지(Request -> User도 포함)
+5. 
