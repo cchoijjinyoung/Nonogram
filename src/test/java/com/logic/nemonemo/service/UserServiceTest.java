@@ -29,7 +29,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("id로 회원 조회")
-    void shouldFindUserById() {
+    void ID로_회원_조회() {
         //given
         User user = User.builder()
                 .username("foo")

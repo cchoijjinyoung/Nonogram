@@ -16,7 +16,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public void signUp(AuthRequest authRequest) {
+    public void signup(AuthRequest authRequest) {
         authService.join(authRequest);
     }
 }

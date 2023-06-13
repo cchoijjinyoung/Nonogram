@@ -48,9 +48,10 @@
 6. validation을 어떻게 할 것인지. ex) 회원가입 시 유효성 검사
 
 ## 고민해야할 내용
-1. findById
-2. Response 필드 및 빌더
+1. [x] findById 테스트
+2. [x] Response 필드 및 빌더
 3. Exception 어떻게 할 지 - validation 포함
 4. Service에서 User -> UserResponse로 바꿔주는게 과연 맞는건지(Request -> User도 포함)
+   - Controller - WebService - Service - Repository 로 하는 방법 존재.
 5. validateDuplicateUser 매소드의 리턴값 고민하기(* 현재 : void)
-   - 성공하면 ok, 아니면 ErrorResponse로 status, message
+   - 성공하면 OK, 아니면 ErrorResponse클래스 status, message

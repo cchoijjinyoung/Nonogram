@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,11 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class UserControllerTest {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    UserController userController;
+    private UserController userController;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    @Autowired
+    private MockMvc mockMvc;
 
     @BeforeEach
     void clean() {
@@ -38,8 +41,8 @@ class UserControllerTest {
                 .username("foo")
                 .nickname("bar")
                 .build();
-        // when
         userRepository.save(user);
+        // when
         UserResponse userResponse = userController.getUserById(user.getId());
         // then
         assertNotNull(userResponse);

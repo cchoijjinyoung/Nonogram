@@ -1,21 +1,22 @@
 package com.logic.nemonemo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.logic.nemonemo.dto.request.AuthRequest;
-import com.logic.nemonemo.entity.User;
 import com.logic.nemonemo.repository.UserRepository;
 import com.logic.nemonemo.service.AuthService;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AuthControllerTest {
@@ -25,15 +26,19 @@ public class AuthControllerTest {
     private AuthService authService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
-    @BeforeEach
+    @AfterEach
     void clean() {
         userRepository.deleteAll();
     }
 
     @Test
-    @DisplayName("유저네임이 중복되지 않는 회원의 가입")
+    @DisplayName("회원가입")
     public void 회원가입() throws Exception {
         //given
         AuthRequest authRequest = AuthRequest.builder()
@@ -42,33 +47,12 @@ public class AuthControllerTest {
                 .password("1234")
                 .build();
         //when
-        authController.signUp(authRequest);
-        userRepository.findByUsername("foo")
+        authController.signup(authRequest);
         //then
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        assertThat(response.getStatusCode().name()).isEqualTo("OK");
-        assertThat(response.getBody()).isEqualTo("회원가입 성공");
-    }
-
-    @Test
-    @DisplayName("유저네임이 중복되는 회원의 가입")
-    void 유저네임_중복_회원가입() throws Exception {
-        //given
-        AuthRequest authRequest1 = AuthRequest.builder()
-                .username("foo")
-                .nickname("bar")
-                .password("1234")
-                .build();
-
-        AuthRequest authRequest2 = AuthRequest.builder()
-                .username("foo")
-                .nickname("bar")
-                .password("1234")
-                .build();
-        //when
-        authController.signUp(authRequest1);
-        authController.signUp(authRequest2);
-        //then
-        Assertions.assertThat(authRequest1).
+        mockMvc.perform(post("/auth/signup")
+                        .content(objectMapper.writeValueAsString(authRequest))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 }
